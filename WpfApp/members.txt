@@ -1,0 +1,8 @@
+Jan,Wtorek,18
+Karol,Czwartek,07
+Jakub,Piątek,07
+Mieczysław,Sobota,07
+Marek,Piątek,18
+Aleksy,Środa,18
+Radosław,Poniedziałek,18
+Edek,Wtorek,18
