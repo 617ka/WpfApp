@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Windows;
@@ -9,12 +9,17 @@ namespace WpfApp
 {
     public partial class MainWindow : Window
     {
+        private List<Member> members;
+
+        Grid mainGrid = new Grid();
+        DataGrid dataGrid = new DataGrid();
+        
         TextBlock textBlock = new TextBlock(new Run("Dodaj członka"));
         TextBox memberName = new TextBox();
         TextBox memberDay = new TextBox();
         TextBox memberHour = new TextBox();
         Button addNewMember = new Button();
-        private List<Member> members;        
+           
 
         public MainWindow()
         {
@@ -43,17 +48,13 @@ namespace WpfApp
             }
             
 
-            var dataGrid = new DataGrid
-            {
-                AutoGenerateColumns = true,
-                ItemsSource = members
-       
-            };
+            
+            dataGrid.ItemsSource = members;
             dataGrid.Width = 400;
             dataGrid.Margin= new Thickness(200,0,0,0);
 
 
-            var mainGrid = new Grid();
+            
             mainGrid.Children.Add(dataGrid);
 
             
@@ -124,6 +125,10 @@ namespace WpfApp
             });
             
             SaveMembersToFile();
+
+            dataGrid.Items.Refresh();
+            
+            
         }
 
         //zapisywanie członków do pliku tekstowego
@@ -137,6 +142,7 @@ namespace WpfApp
                 }
             }
             
+
         }
 
         //sprawdzanie wpisanych danych i przesyłanie dalej
@@ -150,17 +156,13 @@ namespace WpfApp
 
                 AddMember(newName, newDay, newHour);
 
-                var dataGrid = new DataGrid
-                {
-                    AutoGenerateColumns = true,
-                    ItemsSource = members
-                };
-
-                dataGrid.Items.Refresh();
+                memberName.Text = "";
+                memberDay.Text = "";
+                memberHour.Text = "";
             }
             else
             {
-                MessageBox.Show("Wprowadzono złe dane");
+                MessageBox.Show("Wprowadzono złe dane lub brak danych");
             }
 
             
